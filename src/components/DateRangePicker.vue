@@ -632,6 +632,12 @@ export default {
       return newDate;
     },
     dateClick(value) {
+      /**
+       * Emits event when the user clicks any date
+       *
+       * @param {Date} date the date clicked
+       */
+      this.$emit("date-click", value);
       if (this.readonly) return false;
       if (this.in_selection) {
         this.in_selection = false;

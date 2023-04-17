@@ -21,6 +21,7 @@
           @toggle="logEvent('event: open', $event)"
           @startSelection="logEvent('event: startSelection', $event)"
           @finishSelection="logEvent('event: finishSelection', $event)"
+          @range-click="logEvent('event: range-click', $event)"
           :linkedCalendars="linkedCalendars"
           :dateFormat="dateFormat"
           :always-show-calendars="false"

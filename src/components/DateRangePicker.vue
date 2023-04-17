@@ -756,9 +756,9 @@ export default {
       this.in_selection = false;
 
       /**
-       * Emits event when the user clicks any of the ranges (days) in the calendar
+       * Emits event when the user clicks any of the ranges in the calendar
        *
-       * @param {String} value the label value of the range (date) clicked
+       * @param {String} value the label value of the range clicked
        */
       this.$emit("range-click", { value });
 

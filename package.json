@@ -1,6 +1,6 @@
 {
   "name": "vue2-daterange-picker",
-  "version": "0.6.7",
+  "version": "0.7.0",
   "description": "Vue2 date range picker based on https://github.com/dangrossman/bootstrap-daterangepicker (no jQuery)",
   "author": "Nikola Kostadinov <nikolakk@gmail.com>",
   "main": "dist/vue2-daterange-picker.umd.min.js",
@@ -53,8 +53,8 @@
     "eslint-plugin-vue": "^6.0.1",
     "markdown-it-footnote": "^3.0.2",
     "mockdate": "^2.0.5",
-    "node-sass": "^4.11.0",
-    "sass-loader": "^10.1.1",
+    "node-sass": "^8.0.0",
+    "sass-loader": "^10.0.0",
     "vue-template-compiler": "^2.6.10",
     "vuepress": "^1.2",
     "webpack": "^4.41.2"

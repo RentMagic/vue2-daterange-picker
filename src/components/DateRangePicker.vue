@@ -135,6 +135,7 @@
                   :locale-data="locale"
                   :start="start"
                   :end="end"
+                  :disabled-dates="disabledDates"
                   :minDate="min"
                   :maxDate="max"
                   :show-dropdowns="showDropdowns"
@@ -223,6 +224,7 @@ import CalendarTime from "./CalendarTime";
 import CalendarRanges from "./CalendarRanges";
 import { getDateUtil } from "./util";
 import appendToBody from "../directives/appendToBody";
+import dayjs from "dayjs";
 
 export default {
   inheritAttrs: false,
@@ -261,7 +263,7 @@ export default {
     disabledDates: {
       type: Array,
       default() {
-        return [];
+        return ["2019-12-15"];
       },
     },
     /**
@@ -538,19 +540,23 @@ export default {
   methods: {
     isDateDisabled({ date }) {
       if (this.disabledDates.length) {
-        let dateStr =
-          date.getFullYear() +
-          "-" +
-          ("0" + (date.getMonth() + 1)).slice(-2) +
-          "-" +
-          ("0" + date.getDate()).slice(-2);
-        return this.disabledDates.indexOf(dateStr) !== -1;
+        const dateString = dayjs(date).format("YYYY-MM-DD");
+        if (this.disabledDates.includes(dateString)) {
+          return false;
+        }
       }
-      // Also check min/max date
-      const minDate = this.minDate && new Date(this.minDate);
-      const maxDate = this.maxDate && new Date(this.maxDate);
-      if (minDate && date < minDate) return true;
-      if (maxDate && date > maxDate) return true;
+      debugger;
+      const minDate = this.minDate ? dayjs(this.minDate) : null;
+      const maxDate = this.maxDate ? dayjs(this.maxDate) : null;
+
+      if (minDate && dayjs(date).isBefore(minDate)) {
+        return true;
+      }
+
+      if (maxDate && dayjs(date).isAfter(maxDate)) {
+        return true;
+      }
+
       return false;
     },
     //calculate initial month selected in picker

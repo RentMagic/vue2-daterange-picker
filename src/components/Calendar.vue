@@ -68,6 +68,7 @@
 
 <script>
 import dateUtilMixin from "./dateUtilMixin";
+import dayjs from "dayjs";
 
 export default {
   mixins: [dateUtilMixin],
@@ -131,14 +132,10 @@ export default {
     },
     isDateDisabled({ date }) {
       if (this.disabledDates.length) {
-        let dateStr =
-          date.getFullYear() +
-          "-" +
-          ("0" + (date.getMonth() + 1)).slice(-2) +
-          "-" +
-          ("0" + date.getDate()).slice(-2);
-        return this.disabledDates.indexOf(dateStr) !== -1;
+        const dateString = dayjs(date).format("YYYY-MM-DD");
+        return this.disabledDates.includes(dateString);
       }
+
       return false;
     },
     dayClass(date) {
@@ -151,6 +148,9 @@ export default {
 
       let dt_min_compare = new Date(dt);
       dt_min_compare.setHours(23, 59, 59, 999);
+
+      const dateIsBeforeMinDate = dayjs(date).isBefore(this.minDate);
+      const dateIsAfterMaxDate = dayjs(date).isAfter(this.maxDate);
 
       let classes = {
         off: date.getMonth() + 1 !== this.month,
@@ -165,8 +165,8 @@ export default {
         "end-date": dt.getTime() === end.getTime(),
         disabled:
           this.isDateDisabled({ date }) ||
-          (this.minDate && dt_min_compare.getTime() < this.minDate.getTime()) ||
-          (this.maxDate && dt.getTime() > this.maxDate.getTime()),
+          dateIsBeforeMinDate ||
+          dateIsAfterMaxDate,
       };
       return this.dateFormat ? this.dateFormat(classes, date) : classes;
     },
@@ -293,6 +293,7 @@ td.disabled {
   background-color: #eee;
   border-radius: 0;
   opacity: 0.6;
+  cursor: not-allowed;
 }
 
 @function str-replace($string, $search, $replace: "") {

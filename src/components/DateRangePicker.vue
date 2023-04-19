@@ -90,6 +90,7 @@
                   :locale-data="locale"
                   :start="start"
                   :end="end"
+                  :disabled-dates="disabledDates"
                   :minDate="min"
                   :maxDate="max"
                   :show-dropdowns="showDropdowns"
@@ -251,6 +252,16 @@ export default {
       type: [String, Date],
       default() {
         return null;
+      },
+    },
+    /**
+     * dates that should be disabled in the calendar
+     * @default null
+     */
+    disabledDates: {
+      type: Array,
+      default() {
+        return ["2019-11-14"];
       },
     },
     /**
@@ -525,6 +536,18 @@ export default {
     return data;
   },
   methods: {
+    isDateDisabled({ date }) {
+      if (this.disabledDates.length) {
+        let dateStr =
+          date.getFullYear() +
+          "-" +
+          ("0" + (date.getMonth() + 1)).slice(-2) +
+          "-" +
+          ("0" + date.getDate()).slice(-2);
+        return this.disabledDates.indexOf(dateStr) !== -1;
+      }
+      return false;
+    },
     //calculate initial month selected in picker
     selectMonthDate() {
       let dt = this.end || new Date();
@@ -639,6 +662,7 @@ export default {
        */
       this.$emit("date-click", value);
       if (this.readonly) return false;
+      if (this.isDateDisabled({ date: value })) return false;
       if (this.in_selection) {
         this.in_selection = false;
         // this.end = this.normalizeDatetime(value, this.end);

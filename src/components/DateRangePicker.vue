@@ -545,7 +545,7 @@ export default {
           return false;
         }
       }
-      debugger;
+
       const minDate = this.minDate ? dayjs(this.minDate) : null;
       const maxDate = this.maxDate ? dayjs(this.maxDate) : null;
 

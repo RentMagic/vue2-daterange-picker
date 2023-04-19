@@ -547,8 +547,10 @@ export default {
         return this.disabledDates.indexOf(dateStr) !== -1;
       }
       // Also check min/max date
-      if (this.minDate && date < this.minDate) return true;
-      if (this.maxDate && date > this.maxDate) return true;
+      const minDate = this.minDate && new Date(this.minDate);
+      const maxDate = this.maxDate && new Date(this.maxDate);
+      if (minDate && date < minDate) return true;
+      if (maxDate && date > maxDate) return true;
       return false;
     },
     //calculate initial month selected in picker

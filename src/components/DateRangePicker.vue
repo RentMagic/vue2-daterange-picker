@@ -542,7 +542,7 @@ export default {
       if (this.disabledDates.length) {
         const dateString = dayjs(date).format("YYYY-MM-DD");
         if (this.disabledDates.includes(dateString)) {
-          return false;
+          return true;
         }
       }
 

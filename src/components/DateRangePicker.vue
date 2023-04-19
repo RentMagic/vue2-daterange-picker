@@ -261,7 +261,7 @@ export default {
     disabledDates: {
       type: Array,
       default() {
-        return ["2019-11-14"];
+        return [];
       },
     },
     /**
@@ -546,6 +546,9 @@ export default {
           ("0" + date.getDate()).slice(-2);
         return this.disabledDates.indexOf(dateStr) !== -1;
       }
+      // Also check min/max date
+      if (this.minDate && date < this.minDate) return true;
+      if (this.maxDate && date > this.maxDate) return true;
       return false;
     },
     //calculate initial month selected in picker
@@ -662,7 +665,10 @@ export default {
        */
       this.$emit("date-click", value);
       if (this.readonly) return false;
-      if (this.isDateDisabled({ date: value })) return false;
+      if (this.isDateDisabled({ date: value })) {
+        this.$emit("date-disabled-click", value);
+        return false;
+      }
       if (this.in_selection) {
         this.in_selection = false;
         // this.end = this.normalizeDatetime(value, this.end);

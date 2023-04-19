@@ -2,6 +2,10 @@
 
 > Vue2 date range picker based on https://github.com/dangrossman/bootstrap-daterangepicker (no jQuery)
 
+This package is a fork of adding extra features to the original package:
+
+https://github.com/Innologica/vue2-daterange-picker
+
 ## Demo and Usage
 
 You can see a demo and read the documentation here:
@@ -11,7 +15,12 @@ https://innologica.github.io/vue2-daterange-picker/
 
 ```bash
 # install via npm
-npm i vue2-daterange-picker --save
+npm i @rentmagic/vue2-daterange-picker --save
+```
+
+```bash
+# install via yarn
+yarn add @rentmagic/vue2-daterange-picker
 ```
 
 ## TODO

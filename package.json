@@ -1,6 +1,6 @@
 {
   "name": "@rentmagic/vue2-daterange-picker",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Vue2 date range picker based on https://github.com/dangrossman/bootstrap-daterangepicker (no jQuery)",
   "author": "Nikola Kostadinov <nikolakk@gmail.com>, (RentMagic) Dwayne Hulsman <dhulsman@infodatek.com>",
   "main": "dist/vue2-daterange-picker.umd.min.js",
